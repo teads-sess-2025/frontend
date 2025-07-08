@@ -3,7 +3,7 @@
     "version": 1,
     "newProjectRoot": "projects",
     "projects": {
-      "angular-demo-app": {
+      "frontend": {
         "projectType": "application",
         "schematics": {
           "@schematics/angular:component": {
@@ -12,7 +12,7 @@
         },
         "root": "",
         "sourceRoot": "src",
-        "prefix": "app",
+        "prefix": "sess",
         "architect": {
           "build": {
             "builder": "@angular/build:application",
@@ -64,10 +64,10 @@
             "builder": "@angular/build:dev-server",
             "configurations": {
               "production": {
-                "buildTarget": "angular-demo-app:build:production"
+                "buildTarget": "frontend:build:production"
               },
               "development": {
-                "buildTarget": "angular-demo-app:build:development"
+                "buildTarget": "frontend:build:development"
               }
             },
             "defaultConfiguration": "development"
@@ -95,4 +95,3 @@
       }
     }
   }
-  
