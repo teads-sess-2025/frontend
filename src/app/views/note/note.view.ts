@@ -4,11 +4,11 @@ import { isDefined } from "src/app/helpers/common.helpers";
 import { NotesService } from "src/app/services/notes.service";
 import { Note } from "src/app/types/note";
 import { FormsModule } from "@angular/forms";
-import { AsyncPipe, CommonModule } from "@angular/common"
+import { CommonModule } from "@angular/common";
 
 @Component({
     selector: 'sess-note-view',
-    imports: [FormsModule, AsyncPipe, CommonModule],
+    imports: [FormsModule, CommonModule],
     templateUrl: 'note.view.html',
     styleUrl: 'note.view.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
