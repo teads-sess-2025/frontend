@@ -1,8 +1,6 @@
-import { ChangeDetectionStrategy, Component, inject, OnDestroy, OnInit } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
+import { ChangeDetectionStrategy, Component, effect, inject, signal } from "@angular/core";
 import { NotesService } from "src/app/services/notes.service";
 import { Note } from "src/app/types/note";
-import { BaseView } from "../base/base.view";
 import { FormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
@@ -13,18 +11,21 @@ import { CommonModule } from "@angular/common";
     templateUrl: 'home.view.html',
     styleUrl: 'home.view.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
+    host: {
+        '[class.sess-loading-overlay]': 'isLoading()'
+    }
 })
-export class HomeView extends BaseView<{ notes: Note[] }> implements OnInit, OnDestroy {
+export class HomeView {
+    notes = signal<Note[]>([]);
+    isLoading = signal<boolean>(false);
+
     private service: NotesService = inject(NotesService);
 
     constructor() {
-        super();
-        this.uiData$ = new BehaviorSubject({ notes: [] });
-    }
-
-    ngOnInit() {
-        this.callService(this.service.listNotes()).then(
-            notes => this.updateUiData({ notes })
-        );
+        effect(() => {
+            this.service.listNotes(null, this.isLoading).then(
+                notes => this.notes.set(notes)
+            );
+        });
     }
 }
