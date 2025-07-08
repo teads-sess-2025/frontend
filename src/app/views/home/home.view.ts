@@ -8,10 +8,10 @@ import { RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
 
 @Component({
-    selector: 'fsss-home-view',
+    selector: 'sess-home-view',
     imports: [FormsModule, RouterModule, CommonModule],
-    templateUrl: './home.view.html',
-    styleUrls: ['./home.view.less'],
+    templateUrl: 'home.view.html',
+    styleUrl: 'home.view.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeView extends BaseView<{ notes: Note[] }> implements OnInit, OnDestroy {

@@ -10,5 +10,4 @@ import { FooterComponent } from './components/footer/footer.component';
   styleUrl: 'app.component.less'
 })
 export class AppComponent {
-  protected title = 'sess-frontend';
 }

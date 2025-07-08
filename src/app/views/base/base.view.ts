@@ -4,7 +4,7 @@ import { takeUntil, finalize, catchError, tap } from "rxjs/operators";
 
 @Component({ template: '' })
 export abstract class BaseView<T> implements OnDestroy {
-    @HostBinding('class.fsss-loading-overlay')
+    @HostBinding('class.sess-loading-overlay')
     isLoading: boolean = false;
 
     uiData$: BehaviorSubject<T>;

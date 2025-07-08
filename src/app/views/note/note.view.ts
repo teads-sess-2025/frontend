@@ -9,10 +9,10 @@ import { FormsModule } from "@angular/forms";
 import { AsyncPipe, CommonModule } from "@angular/common";
 
 @Component({
-    selector: 'fsss-note-view',
+    selector: 'sess-note-view',
     imports: [FormsModule, AsyncPipe, CommonModule],
-    templateUrl: './note.view.html',
-    styleUrls: ['./note.view.less'],
+    templateUrl: 'note.view.html',
+    styleUrl: 'note.view.less',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NoteView extends BaseView<{ note: Note }> implements OnChanges, OnDestroy {
