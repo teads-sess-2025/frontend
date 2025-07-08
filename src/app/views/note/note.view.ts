@@ -5,9 +5,12 @@ import { isDefined } from "src/app/helpers/common.helpers";
 import { NotesService } from "src/app/services/notes.service";
 import { Note } from "src/app/types/note";
 import { BaseView } from "../base/base.view";
+import { FormsModule } from "@angular/forms";
+import { AsyncPipe, CommonModule } from "@angular/common";
 
 @Component({
     selector: 'fsss-note-view',
+    imports: [FormsModule, AsyncPipe, CommonModule],
     templateUrl: './note.view.html',
     styleUrls: ['./note.view.less'],
     changeDetection: ChangeDetectionStrategy.OnPush,
