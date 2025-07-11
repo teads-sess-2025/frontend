@@ -1,48 +1,64 @@
-import { inject, Injectable } from "@angular/core";
+import { inject, Injectable, WritableSignal } from "@angular/core";
 import { Observable, of } from "rxjs";
 import { Note } from "../types/note";
 import { HttpClient } from '@angular/common/http';
 import { getDefinedProps } from "../helpers/common.helpers";
 import { NOTES_BASE_URL } from "./notes-service.config";
+import { BaseService } from "./base.service";
 
 @Injectable({
     providedIn: 'root'
 })
-export class NotesService {
+export class NotesService extends BaseService {
     private http = inject(HttpClient);
 
-    listNotes(keyword?: string): Observable<Note[]> {
+    listNotes(keyword?: string, loadingIndicator?: WritableSignal<boolean>): Promise<Note[]> {
         const queryParams = getDefinedProps({ keyword });
 
-        return this.http.get<Note[]>(
-            NOTES_BASE_URL,
-            { params: queryParams }
+        return this.callService(
+            this.http.get<Note[]>(
+                NOTES_BASE_URL,
+                { params: queryParams }
+            ),
+            loadingIndicator
         );
     }
 
-    getNote(id: number): Observable<Note> {
-        return this.http.get<Note>(
-            `${NOTES_BASE_URL}/${id}`
+    getNote(id: number, loadingIndicator?: WritableSignal<boolean>): Promise<Note> {
+        return this.callService(
+            this.http.get<Note>(
+                `${NOTES_BASE_URL}/${id}`
+            ),
+            loadingIndicator
         );
     }
 
-    createNote(note: Note): Observable<Note> {
-        return this.http.post<Note>(
-            NOTES_BASE_URL,
-            note
+    createNote(note: Note, loadingIndicator?: WritableSignal<boolean>): Promise<Note> {
+        return this.callService(
+            this.http.post<Note>(
+                NOTES_BASE_URL,
+                note
+            ),
+            loadingIndicator
         );
     }
 
-    updateNote(note: Note): Observable<Note> {
-        return this.http.put<Note>(
-            `${NOTES_BASE_URL}/${note.id}`,
-            note
+    updateNote(note: Note, loadingIndicator?: WritableSignal<boolean>): Promise<Note> {
+        return this.callService(
+            this.http.put<Note>(
+                `${NOTES_BASE_URL}/${note.id}`,
+                note
+            ),
+            loadingIndicator
         );
     }
 
-    deleteNote(id: number): Observable<void> {
-        return this.http.delete<void>(
-            `${NOTES_BASE_URL}/${id}`,
+    deleteNote(id: number, loadingIndicator?: WritableSignal<boolean>): Promise<void> {
+        return this.callService(
+            this.http.delete<void>(
+                `${NOTES_BASE_URL}/${id}`,
+            ),
+            loadingIndicator
         );
     }
 }
