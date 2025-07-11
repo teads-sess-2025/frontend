@@ -6,6 +6,7 @@ import { NotesService } from "src/app/services/notes.service";
 import { Note } from "src/app/types/note";
 import { BaseView } from "../base/base.view";
 
+
 @Component({
     selector: 'fsss-note-view',
     templateUrl: './note.view.html',
